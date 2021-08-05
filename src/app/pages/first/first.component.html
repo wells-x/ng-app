@@ -1,0 +1,32 @@
+<!-- <p>first works!</p>
+<p (click)="goSecond()">go second-component</p> -->
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <nz-input-group nzPrefixIcon="user">
+        <input formControlName="userName" nz-input placeholder="Username" />
+        <ng-template #errorTpl let-control>
+          <div *ngIf="control.hasError('required')">
+            Name is required.
+          </div>
+          <div *ngIf="control.hasError('minlength')">
+            Name must be at least 5 characters long.
+          </div>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input formControlName="password" nz-input type="password" placeholder="Password" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+    </nz-form-control>
+  </nz-form-item>
+  <!-- <p><span *ngFor="let item of validateForm.value">{{item.key}}</span></p> -->
+</form>
