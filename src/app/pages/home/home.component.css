@@ -1,0 +1,15 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 320px;
+  margin: 10px;
+  padding: 1px;
+}
+
+/* .card:not(:last-child) {
+  margin-right: 20px;
+} */

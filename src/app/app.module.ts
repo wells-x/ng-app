@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './pages/layout.component';
 import { FirstComponent } from './pages/first/first.component';
 import { SecondComponent } from './pages/second/second.component';
+import { FirstDeleteComponent } from './components/first-delete/first-delete.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CardComponent } from './components/card/card.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -18,12 +22,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { FirstDeleteComponent } from './components/first-delete/first-delete.component';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { LoginComponent } from './pages/login/login.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(zh);
 
@@ -37,12 +40,21 @@ const routers: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
         path: 'second',
         component: SecondComponent,
       },
       {
         path: 'first',
-        component: SecondComponent,
+        component: FirstComponent,
+      },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
       },
     ]
   },
@@ -58,6 +70,8 @@ const routers: Routes = [
     SecondComponent,
     LayoutComponent,
     LoginComponent,
+    CardComponent,
+    HomeComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -75,8 +89,15 @@ const routers: Routes = [
     NzMenuModule,
     NzIconModule,
     NzButtonModule,
+    NzCardModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+  ],
+  exports: [
+  ],
+  schemas: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

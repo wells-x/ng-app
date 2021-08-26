@@ -11,7 +11,7 @@ import { FirstService } from 'src/app/services/first.service';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  name = 'first page';
+  name = 'login page';
 
   constructor(
     private router: Router,
@@ -48,10 +48,10 @@ export class LoginComponent implements OnInit {
 
     // NzNotificationService.success('title', 'sdf');
     // NzNotificationService.success('title', 'content');
-    // this.goSecond();
     this.firstService.open().subscribe(item => {
       console.log(item);
       this.toast.success('succes', item);
+      this.goSecond();
     });
   }
 
