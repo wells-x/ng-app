@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FirstService } from 'src/app/services/first.service';
+import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-first',
@@ -11,7 +12,6 @@ import { FirstService } from 'src/app/services/first.service';
 })
 export class FirstComponent implements OnInit {
   validateForm!: FormGroup;
-  name = 'first page';
 
   constructor(
     private router: Router,
@@ -20,24 +20,26 @@ export class FirstComponent implements OnInit {
     private firstService: FirstService,
   ) { }
 
+  get ipControl(): FormArray {
+    return this.validateForm.get('ip') as FormArray;
+  }
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required, Validators.minLength(5)]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
+      name: [null, [Validators.required, Validators.minLength(5)]],
+      ip: [[1, 1, 1, 1], []],
       remember: [true]
     });
   }
 
   goSecond(): void {
-    this.router.navigate(['/second-component'], { queryParams: { name: this.name } });
+    this.router.navigate(['/second-component'], { queryParams: { name: '' } });
   }
   submitForm(): void {
-    console.log(this.validateForm);
     for (const i of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm);
     if (this.validateForm.status !== 'VALID') { return; }
     this.doLogin();
   }
@@ -53,7 +55,6 @@ export class FirstComponent implements OnInit {
     // NzNotificationService.success('title', 'content');
     // this.goSecond();
     this.firstService.open().subscribe(item => {
-      console.log(item);
       this.toast.success('succes', item);
     });
   }

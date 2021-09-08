@@ -1,0 +1,12 @@
+.ipv4-control {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 260px;
+
+  input {
+    border: 0;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+  }
+}

@@ -1,10 +1,9 @@
-<!-- <p>first works!</p>
-<p (click)="goSecond()">go second-component</p> -->
-<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control [nzErrorTip]="errorTpl">
-      <nz-input-group nzPrefixIcon="user">
-        <input formControlName="userName" nz-input placeholder="Username" />
+    <nz-form-label [nzSpan]="3" nzFor="name">Name</nz-form-label>
+    <nz-form-control [nzSpan]="8" [nzErrorTip]="errorTpl">
+      <nz-input-group>
+        <input formControlName="name" nz-input placeholder="Name" />
         <ng-template #errorTpl let-control>
           <div *ngIf="control.hasError('required')">
             Name is required.
@@ -17,15 +16,19 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
-      <nz-input-group nzPrefixIcon="lock">
-        <input formControlName="password" nz-input type="password" placeholder="Password" />
-      </nz-input-group>
+    <nz-form-label [nzSpan]="3" nzFor="ip">ip</nz-form-label>
+    <nz-form-control [nzSpan]="8">
+      <app-ipv4 formControlName="ip"></app-ipv4>
     </nz-form-control>
+
+
+    <!-- <div *ngFor="let ipv4Subnet of ipControl.controls;index as index">
+      <app-ipv4 [formControlName]="index"></app-ipv4>
+    </div> -->
   </nz-form-item>
   <nz-form-item>
     <nz-form-control>
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+      <button nz-button nzType="primary">submit</button>
     </nz-form-control>
   </nz-form-item>
   <!-- <p><span *ngFor="let item of validateForm.value">{{item.key}}</span></p> -->

@@ -27,6 +27,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { Ipv4Component } from './components/ipv4/ipv4.component';
 
 registerLocaleData(zh);
 
@@ -71,7 +72,8 @@ const routers: Routes = [
     LayoutComponent,
     LoginComponent,
     CardComponent,
-    HomeComponent
+    HomeComponent,
+    Ipv4Component
   ],
   imports: [
     ReactiveFormsModule,
