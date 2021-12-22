@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FirstService } from 'src/app/services/first.service';
@@ -27,9 +27,18 @@ export class FirstComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(5)]],
-      ip: [[1, 1, 1, 1], []],
+      ip: [[null, null, null, null], [this.ipValidator]],
       remember: [true]
     });
+  }
+
+  ipValidator(): ValidatorFn {
+    return (control) => {
+      console.log(control);
+      return {
+        test: true
+      };
+    };
   }
 
   goSecond(): void {

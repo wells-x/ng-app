@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, NgControl } from '@angu
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-ipv4',
@@ -27,9 +28,10 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
   @Input()
   disabledItems: [boolean, boolean, boolean, boolean];
 
-  value: [number, number, number, number];
+  value: [number, number, number, number] = [null, null, null, null];
   change: (value: [number, number, number, number]) => void;
   touched: () => void;
+  randomClassName = UtilsService.getRandomStr();
 
   @ViewChildren(NzTooltipDirective)
   tooltips: QueryList<NzTooltipDirective>;
@@ -52,7 +54,6 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.ngControl.valueAccessor = this;
     const ip = this.value || [];
     this.formGroup = this.formBuilder.group({
       ip: this.formBuilder.array([
@@ -104,13 +105,13 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
   }
 
   writeValue(obj: any): void {
-    this.value = obj;
-    if (this.formGroup) {
-      this.formGroup.patchValue({ ip: obj || [] });
+    if (obj) {
+      this.value = obj;
+      this.formGroup?.patchValue({ ip: obj || [] });
     }
   }
 
-  textInput(controlItem: FormControl, index: number): void {
+  textInput = (controlItem: FormControl, index: number, $event: Event) => {
     const value = controlItem.value;
     const hasPoint = value.includes('.');
     const submitValue = Number.parseInt(value + '', 0) || 0;
@@ -119,7 +120,6 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
     if (hasPoint) {
       this.toNextInput(index);
     }
-    console.log((submitValue + ''));
     if ((submitValue + '').length >= 3) {
       this.toNextInput(index);
     }
@@ -129,7 +129,8 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
     if (index >= 3) {
       return;
     }
-    const nextInput: HTMLInputElement | null = document.querySelectorAll(`.ipv4-control input`)[index + 1] as HTMLInputElement;
+    const nextInput: HTMLInputElement | null =
+      document.querySelectorAll(`.ipv4-control.${this.randomClassName} input`)[index + 1] as HTMLInputElement;
     nextInput?.focus({ preventScroll: true });
     nextInput?.select();
   }
@@ -157,7 +158,7 @@ export class Ipv4Component implements OnInit, OnChanges, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.tooltipsSubscription.unsubscribe();
+    this.tooltipsSubscription?.unsubscribe();
     this.document.removeEventListener('scroll', this.onScroll, true);
   }
 }

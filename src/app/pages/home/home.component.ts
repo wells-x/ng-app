@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { HomeData } from 'src/app/models/back-end/home';
 import { HomeApiService } from 'src/app/services/home/home-api.service';
 
@@ -20,7 +22,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getList();
+    this.getList().subscribe();
   }
 
   refresh(): void {
@@ -28,21 +30,28 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.refreshing = true;
-    this.getList().finally(() => {
-      setTimeout(() => {
-        this.refreshing = false;
-      }, 500);
+    // this.getList().finally(() => {
+    //   setTimeout(() => {
+    //     this.refreshing = false;
+    //   }, 500);
+    // });
+    this.getList().subscribe(() => {
+      this.refreshing = false;
     });
   }
 
-  getList(): Promise<any> {
+  getList(): Observable<any> {
     return this.homeApiService.getList()
-      .then(res => {
-        this.list = res;
-      })
-      .catch(() => {
-        this.toast.error('list', 'get list error');
-      });
+      .pipe(
+        map((list) => {
+          return list.map(item => {
+            return { ...item, };
+          });
+        }),
+        tap(res => {
+          this.list = res;
+        })
+      );
   }
 
 }

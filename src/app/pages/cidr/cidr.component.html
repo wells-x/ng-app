@@ -1,0 +1,41 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="name">Name</nz-form-label>
+    <nz-form-control [nzSpan]="8" [nzErrorTip]="errorTpl">
+      <nz-input-group>
+        <input formControlName="name" nz-input placeholder="Name" />
+        <ng-template #errorTpl let-control>
+          <div *ngIf="control.hasError('required')">
+            Name is required.
+          </div>
+          <div *ngIf="control.hasError('minlength')">
+            Name must be at least 5 characters long.
+          </div>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="ip">ip</nz-form-label>
+    <nz-form-control [nzSpan]="18" >
+      <app-ipv4 formControlName="ip"></app-ipv4>
+      <app-ipv4 formControlName="ip"></app-ipv4>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="cidr">cidr</nz-form-label>
+    <nz-form-control [nzSpan]="18" [nzErrorTip]="cidrErrorTpl">
+      <app-cidr-editor formControlName="cidr"></app-cidr-editor>
+      <ng-template #cidrErrorTpl let-control>
+        <div *ngIf="control.hasError('cover')">
+          cidr 错误
+        </div>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary">submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

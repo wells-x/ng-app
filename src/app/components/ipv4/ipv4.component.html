@@ -1,16 +1,19 @@
-<form [formGroup]="formGroup" class="ipv4-control">
+<form [formGroup]="formGroup" [classList]="['ipv4-control',randomClassName].join(' ')">
   <ng-container *ngFor="let ipItem of ipControl.controls;first as isFirst; index as index">
     {{!isFirst ?'&nbsp;.&nbsp;':''}}
     <nz-form-control>
-      <input nz-input
-             [formControl]="ipItem"
-             maxlength="3"
-             nz-tooltip
-             nzTooltipTrigger="focus"
-             [nzTooltipTitle]="errorTip"
-             [nzVisible]="false"
-             (input)="textInput(ipItem, index)"
-             nzTooltipTrigger="null" />
+      <label>
+        <input nz-input
+              placeholder=""
+              [formControl]="ipItem"
+              maxlength="3"
+              nz-tooltip
+              nzTooltipTrigger="focus"
+              [nzTooltipTitle]="errorTip"
+              [nzVisible]="false"
+              (input)="textInput(ipItem, index, $event)"
+              nzTooltipTrigger="null" />
+      </label>
     </nz-form-control>
   </ng-container>
 </form>

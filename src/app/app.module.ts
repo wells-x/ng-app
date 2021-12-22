@@ -28,6 +28,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { Ipv4Component } from './components/ipv4/ipv4.component';
+import { RxComponent } from './pages/rx/rx.component';
+import { CidrComponent } from './pages/cidr/cidr.component';
+import { CidrEditorComponent } from './components/cidr-editor/cidr-editor.component';
 
 registerLocaleData(zh);
 
@@ -53,6 +56,14 @@ const routers: Routes = [
         component: FirstComponent,
       },
       {
+        path: 'rx',
+        component: RxComponent,
+      },
+      {
+        path: 'cidr',
+        component: CidrComponent,
+      },
+      {
         path: '',
         redirectTo: '/home',
         pathMatch: 'full',
@@ -73,7 +84,10 @@ const routers: Routes = [
     LoginComponent,
     CardComponent,
     HomeComponent,
-    Ipv4Component
+    Ipv4Component,
+    RxComponent,
+    CidrComponent,
+    CidrEditorComponent
   ],
   imports: [
     ReactiveFormsModule,

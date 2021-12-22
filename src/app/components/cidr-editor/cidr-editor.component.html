@@ -1,0 +1,5 @@
+<form [formGroup]="formGroup" class="cidr-control">
+  <app-ipv4 formControlName="ip"></app-ipv4>
+  /
+  <input nz-input class="cidr-mask" type="text" [max]="30" (input)="maskInput()" formControlName="mask">
+</form>

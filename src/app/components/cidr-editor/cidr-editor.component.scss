@@ -1,16 +1,17 @@
 :host {
-  .ipv4-control {
+  .cidr-control {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 260px;
-
+    height: 32px;
+    line-height: 32px;
     input {
       border: 0;
       border-bottom: 1px solid #d9d9d9;
       text-align: center;
-      outline: 0;
+      outline: none;
       box-shadow: none;
+    }
+    .cidr-mask{
+      width: 60px;
     }
   }
 }
