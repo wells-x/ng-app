@@ -27,11 +27,27 @@ export class CidrComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required, Validators.minLength(5)]],
+      name: [null, [Validators.required, this.checkRegexp()]],
       ip: [null, null, null, null],
       cidr: [[[192, 168, 0, 0], 24], [this.cidrValidator()]],
       remember: [true]
     });
+  }
+
+  checkRegexp(): ValidatorFn {
+
+    return (control) => {
+      if (!control.value) {
+        return;
+      }
+      const reg = /^[\\]+$/;
+      const a = reg.test(control.value);
+      console.log(`${reg}.test(${(control.value)}) return ${a}`, control.value, reg);
+      if (!a) {
+        return { test: true };
+      }
+      return null;
+    };
   }
 
   // // 使用reverse 数组补0
@@ -150,30 +166,30 @@ export class CidrComponent implements OnInit {
       return false;
     }
 
-    const saveBit = new Array(31).fill(0).fill(1, 0, Number(mask) - 1).join('');
+    // const saveBit = new Array(31).fill(0).fill(1, 0, Number(mask) - 1).join('');
+    // const unuseBit = new Array(32 - Number(mask)).fill(1).join('');
+    // tslint:disable-next-line:no-bitwise
+    const unuseNum = (1 << (32 - Number(mask))) - 1;
 
-    const saveNum = parseInt(saveBit, 2);
+    const unuseBit = unuseNum.toString(2);
 
     const allBitArr = segment.map((snippet: number) => {
       const snippetBit = (snippet || 0).toString(2);
       return new Array(8 - snippetBit.length).fill('0').concat(snippetBit).join('');
     }).join('').split('');
-    allBitArr.shift();
+    // allBitArr.shift();
     const segmantBit = allBitArr.join('');
     const saveSegmant = parseInt(segmantBit, 2);
 
-    console.log(saveBit, segmantBit);
-    console.log(saveBit.length, segmantBit.length);
-    console.log(saveNum, saveSegmant);
+    console.log(unuseBit, segmantBit);
+    console.log((unuseBit + '').length, segmantBit.length);
+    console.log(unuseNum, saveSegmant);
 
     // tslint:disable-next-line:no-bitwise
-    console.log(saveSegmant & saveNum);
+    console.log(saveSegmant & unuseNum);
 
     // tslint:disable-next-line:no-bitwise
-    if ((saveSegmant & saveNum) !== saveSegmant) {
-      return false;
-    }
-    return true;
+    return !(saveSegmant & unuseNum);
   }
 
   cidrValidator(): ValidatorFn {

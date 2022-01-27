@@ -68,7 +68,9 @@ export class CidrEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   maskInput(): void {
     const { ip, mask } = this.formGroup.getRawValue();
-    this.value = [ip, mask];
+    const computedMask = mask < 0 ? 2 : mask > 32 ? 29 : mask;
+    this.formGroup.patchValue({ mask: computedMask });
+    this.value = [ip, computedMask];
   }
 
   ngOnChanges(changes): void {

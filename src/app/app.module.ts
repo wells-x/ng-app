@@ -1,15 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AppComponent } from './app.component';
-import { LayoutComponent } from './pages/layout.component';
-import { FirstComponent } from './pages/first/first.component';
-import { SecondComponent } from './pages/second/second.component';
-import { FirstDeleteComponent } from './components/first-delete/first-delete.component';
-import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CardComponent } from './components/card/card.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -27,6 +18,16 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+
+import { AppComponent } from './app.component';
+import { LayoutComponent } from './pages/layout.component';
+import { FirstComponent } from './pages/first/first.component';
+import { SecondComponent } from './pages/second/second.component';
+import { FirstDeleteComponent } from './components/first-delete/first-delete.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CardComponent } from './components/card/card.component';
 import { Ipv4Component } from './components/ipv4/ipv4.component';
 import { RxComponent } from './pages/rx/rx.component';
 import { CidrComponent } from './pages/cidr/cidr.component';
@@ -42,33 +43,7 @@ const routers: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-      {
-        path: 'second',
-        component: SecondComponent,
-      },
-      {
-        path: 'first',
-        component: FirstComponent,
-      },
-      {
-        path: 'rx',
-        component: RxComponent,
-      },
-      {
-        path: 'cidr',
-        component: CidrComponent,
-      },
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full',
-      },
-    ]
+    loadChildren: () => import('./router.module').then(module => module.AppRoutingModule)
   },
 ];
 
@@ -98,6 +73,7 @@ const routers: Routes = [
     NzFormModule,
     NzModalModule,
     NzInputModule,
+    NzInputNumberModule,
     BrowserAnimationsModule,
     NzNotificationModule,
     NzLayoutModule,
