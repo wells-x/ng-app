@@ -1,0 +1,90 @@
+
+# 操作符
+## 组合
+  * combineAll
+  * combineLatest
+  * concat
+  * concatAll
+  * forkJoin
+  * merge
+  * mergeAll
+  * pairwise
+  * race
+  * startWith
+  * withLatestFrom
+  * zip
+## 条件
+  * defaultIfEmpty
+  * every
+## 创建
+  * create
+  * empty
+  * from
+  * fromEvent
+  * fromPromise
+  * interval
+  * of
+  * range
+  * throw
+  * timer
+## 错误处理
+  * catchError
+  * retry
+  * retryWhen
+## 多播
+  * publish
+  * multicast
+  * share
+  * shareReplay
+## 过滤
+  * debounce
+  * debounceTime
+  * distinctUntilChanged
+  * filter
+  * first
+  * ignoreElements
+  * last
+  * sample
+  * single
+  * skip
+  * skipUntil
+  * skipWhile
+  * take
+  * takeUntil
+  * takeWhile
+  * throttle
+  * throttleTime
+## 转换
+  * buffer
+  * bufferCount
+  * bufferTime
+  * bufferToggle
+  * bufferWhen
+  * concatMap
+  * concatMapTo
+  * exhaustMap
+  * expand
+  * exhaustMap
+  * groupBy
+  * map
+  * mapTo
+  * mergeMap
+  * partition
+  * pluck
+  * reduce
+  * scan
+  * switchMap
+  * window
+  * windowCount
+  * windowTime
+  * windowToggle
+  * windowWhen
+## 工具
+  * do
+  * delay
+  * delayWhen
+  * dematerialize
+  * let
+  * timeout
+  * toPromise
+## 完整列表

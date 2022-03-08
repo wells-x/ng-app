@@ -1,5 +1,9 @@
 <div>
+  <h3>操作符</h3>
   <ul>
-    <li *ngFor="let item of list" (click)="item.onclick()">{{item.text}}</li>
+    <li *ngFor="let item of list">
+      <h4 class="do-click" (click)="item.onclick()">{{ item.text }}</h4>
+      <p>{{ item.description }}</p>
+    </li>
   </ul>
 </div>
