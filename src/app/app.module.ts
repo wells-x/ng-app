@@ -60,7 +60,7 @@ const routers: Routes = [
     CardComponent,
     HomeComponent,
     Ipv4Component,
-    RxComponent,
+    // RxComponent,
     CidrComponent,
     CidrEditorComponent
   ],

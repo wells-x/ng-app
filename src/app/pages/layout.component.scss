@@ -38,8 +38,12 @@ nz-content {
   width: 500px;
 }
 
-.header-right{
+.header-right {
   padding: 0 10px;
   color: #fff;
   cursor: pointer;
+
+  .anticon {
+    margin-left: 4px;
+  }
 }

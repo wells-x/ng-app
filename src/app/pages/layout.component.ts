@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class LayoutComponent implements OnInit {
   }
 
   initPage(): void {
-    // console.log(this.title);
+    console.log(this.title);
   }
 
   logout(): void {

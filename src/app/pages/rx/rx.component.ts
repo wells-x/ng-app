@@ -25,7 +25,9 @@ import {
 })
 export class RxComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    console.log('');
+  }
 
   list: any[] = [
     {

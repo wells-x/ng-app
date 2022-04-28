@@ -9,9 +9,8 @@
       </ul>
     </div>
     <div class="header-right" (click)="logout()">
-      logout
+      <span>logout </span>
       <i nz-icon nzType="logout" nzTheme="outline"></i>
-      <!-- <i nz-icon [nzType]="'heart'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i> -->
     </div>
   </nz-header>
   <nz-layout>
@@ -56,14 +55,3 @@
     </nz-layout>
   </nz-layout>
 </nz-layout>
-<!-- <h1>Angular Router App</h1> -->
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
-<!-- <nav>
-    <ul>
-      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/first-component" routerLinkActive="active">First Component</a></li>
-      <li><a routerLink="/second-component" routerLinkActive="active">Second Component</a></li>
-    </ul>
-  </nav> -->
-<!-- The routed views render in the <router-outlet>-->
-<!-- <router-outlet></router-outlet> -->

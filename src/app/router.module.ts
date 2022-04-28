@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CidrComponent } from './pages/cidr/cidr.component';
 import { FirstComponent } from './pages/first/first.component';
 import { HomeComponent } from './pages/home/home.component';
-import { RxComponent } from './pages/rx/rx.component';
 import { SecondComponent } from './pages/second/second.component';
 
 export const routes: Routes = [
@@ -21,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'rx',
-    component: RxComponent,
+    loadChildren: () => import('./pages/rx/rx.module').then(e => e.RxModule)
   },
   {
     path: 'cidr',
